@@ -1,0 +1,75 @@
+/********************
+ ***   Struktur   ***
+ ********************/
+
+ul.dropDownMenu {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	height: 30px;
+	width: 100%;
+}
+
+
+ul.dropDownMenu ul {
+
+	margin: 0;
+	padding: 0;
+
+	list-style-type: none;
+	display: none;
+}
+
+
+ul.dropDownMenu ul li:hover a {
+}
+
+ul.dropDownMenu li {
+	position:relative;
+	float:left;
+}
+
+ul.dropDownMenu li ul li {
+	float:none;
+}
+
+ul.dropDownMenu li a {
+
+	display: block;
+}
+
+
+ul.dropDownMenu li:hover > ul {
+	display: block;
+	position: absolute;
+	top: 1.5em;
+}
+
+ul.dropDownMenu li ul li:hover > ul {
+	display:block;
+	position:absolute;
+	left: 100%;
+	top: 0;
+}
+
+/******************
+ ***   Farben   ***
+ ******************/
+ul.dropDownMenu li,
+ul.dropDownMenu ul {
+	background-color:#666;
+}
+
+ul.dropDownMenu li.hasSubmenu {
+	background-image:url(arrow.png);
+	background-repeat:no-repeat;
+	background-position:right 0.5em;
+}
+
+ul.dropDownMenu a {
+	color:white;
+	padding: 0.1em 1em 0.1em 0.3em;
+	line-height: 1.3em;
+	text-decoration: none;
+	white-space: nowrap;
+}

@@ -1,0 +1,45 @@
+<?php
+
+/*
+ * MyFramework::
+ *
+ * @since 04.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class ModuleManager implements ifaceSingleton {
+
+	protected
+		$arrModuleList = array ();
+	protected static
+		$objInstance = null;
+
+	public static function getInstance() {
+		if (!(self :: $objInstance instanceof ModuleManager)) {
+			self :: $objInstance = new ModuleManager();
+		}
+		return self :: $objInstance;
+	}
+
+	public function bind(ifaceController $objController) {
+	    $this->objController = $objController;
+	}
+
+	public function __construct() {
+
+	}
+
+	public function getModule($sModuleName) {
+
+		$sModuleClass = 'Module_' . $sModuleName.'_Controller_'.$sModuleName;
+		if (!isset ($this->arrModuleList[$sModuleName]) || !($this->arrModuleList[$sModuleName] instanceof $SModuleClass)) {
+			$this->arrModuleList[$sModuleName] = new $sModuleClass;
+			$this->arrModuleList[$sModuleName]->bind($this->objController);
+		}
+
+		return $this->arrModuleList[$sModuleName];
+	}
+
+}
+?>

@@ -1,0 +1,1712 @@
+#LyX 1.5.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass scrbook
+\language ngerman
+\inputencoding auto
+\font_roman utopia
+\font_sans helvet
+\font_typewriter courier
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize 10
+\spacing other 1.15
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 2cm
+\topmargin 1.5cm
+\rightmargin 3cm
+\bottommargin 2cm
+\headheight 0.5cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language danish
+\papercolumns 1
+\papersides 1
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+MyFramework
+\end_layout
+
+\begin_layout Date
+Stand: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Dedication
+Dieses Werk ist das Ergebnis von einer langen Woche Prüfungsvorbereitung.
+ Ich habe mich dabei auf Prüfungen über Design-Patterns, Programmdokumentation
+ und Objektorientierte Programmierung vorbereitet.
+ Die eigentliche Idee zu diesem Werk entstand allerdings schon vor zwei
+ Jahren.
+ Durch viele Diskussionen in der UNI und auf Arbeit konnte ich zahlreiche
+ Ideen und neue Techniken einbauen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Allgemeines
+\end_layout
+
+\begin_layout Chapter
+Grundlagenwissen über Frameworks
+\end_layout
+
+\begin_layout Section
+Was ist ein Framework?
+\end_layout
+
+\begin_layout Section
+Wie ist ein Framework aufgebaut
+\end_layout
+
+\begin_layout Section
+Was bietet ein Framework dem Programmierer
+\end_layout
+
+\begin_layout Section
+Was bietet ein Framework dem Anwender
+\end_layout
+
+\begin_layout Section
+Ansätze zum Aufbau eines Frameworks
+\end_layout
+
+\begin_layout Chapter
+Dieses Framework
+\end_layout
+
+\begin_layout Section
+Ablaufdiagramm
+\end_layout
+
+\begin_layout Subsection
+Allgemeiner Ablauf
+\end_layout
+
+\begin_layout Enumerate
+Start
+\end_layout
+
+\begin_layout Enumerate
+Framework starten
+\end_layout
+
+\begin_layout Enumerate
+Konfiguration laden
+\end_layout
+
+\begin_layout Enumerate
+Datenbankobjekt initialisieren
+\end_layout
+
+\begin_layout Enumerate
+EventHandler initialisieren
+\end_layout
+
+\begin_layout Enumerate
+RequestHandler initialisieren
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Event 
+\noun on
+request_handler_start
+\noun default
+ absetzen
+\end_layout
+
+\begin_layout Enumerate
+Session erkennen
+\end_layout
+
+\begin_layout Enumerate
+Sessiondaten einbinden
+\end_layout
+
+\begin_layout Enumerate
+Event 
+\noun on
+request_handler_stop
+\noun default
+ absetzen
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Nutzerobjekt initialisieren
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Event 
+\noun on
+user_object_start
+\noun default
+ absetzen
+\end_layout
+
+\begin_layout Enumerate
+Benutzerobjekt mit dem Nutzerdaten initialisieren
+\end_layout
+
+\begin_layout Enumerate
+Event 
+\noun on
+user_object_stop
+\noun default
+ absetzen
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+ModuleManager initialisieren
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Event 
+\noun on
+module_manager_start
+\noun default
+ absetzen
+\end_layout
+
+\begin_layout Enumerate
+Modultabelle aus Datenbank laden
+\end_layout
+
+\begin_layout Enumerate
+Sessiondaten einbinden
+\end_layout
+
+\begin_layout Enumerate
+Event 
+\noun on
+module_manager_stop
+\noun default
+ absetzen
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Event 
+\noun on
+start_application
+\noun default
+ absetzen
+\end_layout
+
+\begin_layout Subsection
+Modul Sites
+\end_layout
+
+\begin_layout Enumerate
+Event 
+\noun on
+start_application
+\end_layout
+
+\begin_layout Enumerate
+Menübaum laden
+\end_layout
+
+\begin_layout Enumerate
+Rechteprüfung Menübaum
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Entfernen von Menüeinträgen ohne ausreichende Berechtigung
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Pfadprüfung und Auffinden der aktuellen Seite (URL-Parameter)
+\end_layout
+
+\begin_layout Enumerate
+Event 
+\noun on
+load_page
+\noun default
+ absetzen
+\end_layout
+
+\begin_layout Section
+erweitertes Schichtenmodell (MVC)
+\end_layout
+
+\begin_layout Part
+Anwenderhandbuch
+\end_layout
+
+\begin_layout Chapter
+Inline-Administration
+\end_layout
+
+\begin_layout Section
+Versionsverwaltung
+\end_layout
+
+\begin_layout Standard
+Alle Contentobjekte werden in einem zentralen Versionierungsmodul verwaltet.
+ Damit lassen sich problemlos alle älteren Versionen eines jeden Contentobjektes
+ jederzeit wieder herstellen.
+\end_layout
+
+\begin_layout Section
+WYSIWYG-Editoren
+\end_layout
+
+\begin_layout Subsection
+Welche WYSYWIG-Editoren stehen zur Verfügung?
+\end_layout
+
+\begin_layout Subsection
+Benutzerspezifische Toolbars
+\end_layout
+
+\begin_layout Section
+Contentspezifische Editoren
+\end_layout
+
+\begin_layout Standard
+Für Bilder, Videos und andere nicht HTML-Objekte werden weitere Editiermöglichke
+iten möglichst inline angeboten.
+ So kann man beispielsweise Bilder mit der eingeblendeten Toolbar bequem
+ bearbeiten.
+\end_layout
+
+\begin_layout Subsection
+Bildeditor
+\end_layout
+
+\begin_layout Itemize
+Flashplugin mit Bildbearbeitungsmethoden
+\end_layout
+
+\begin_layout Itemize
+via AJAX werden die bearbeiteten Bilder in einer neuen Version auf dem Server
+ gespeichert und im Browser aktualisiert
+\end_layout
+
+\begin_layout Section
+Rechteverwaltung
+\end_layout
+
+\begin_layout Standard
+Für jedes einzelne 
+\emph on
+Contentobjekt
+\emph default
+ können die Rechte für die 
+\emph on
+Benutzer
+\emph default
+, 
+\emph on
+Gruppen
+\emph default
+ und 
+\emph on
+Rollen
+\emph default
+ frei festgelegt werden.
+ Zur komfortablen und übersichtlichen Bearbeitung der sogenannten 
+\emph on
+Rechtematrix
+\emph default
+ wird eine dynamische Tabelle erzeugt.
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Standard
+Wie kann eine solche Tabelle mit AJAX bzw.
+ nur mit Javascript dynamisch und benutzerfreundlich gestaltet werden?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Programmierhandbuch
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../PHPCommerce/docs/Controller.eps
+	width 86page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Aufbau des Frameworks mit einem Controller
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Zugriff auf die Konfigurationswerte
+\end_layout
+
+\begin_layout Section
+Statische Konfigurationswerte
+\end_layout
+
+\begin_layout Standard
+Datenbankverbindungen, Autoloaderdateiname, Basisverzeichnis der Installation
+\end_layout
+
+\begin_layout Section
+Dynamische Konfigurationswerte
+\end_layout
+
+\begin_layout Standard
+werden aus der Datenbanktabelle 
+\noun on
+configuration
+\noun default
+ geholt
+\end_layout
+
+\begin_layout Section
+Die Klasse Config
+\end_layout
+
+\begin_layout Subsection*
+private static $arrConfig = array();
+\end_layout
+
+\begin_layout Subsection*
+public static Config->set($id, $value)
+\end_layout
+
+\begin_layout Standard
+Setzen eines Konfigurationswertes
+\end_layout
+
+\begin_layout LyX-Code
+public static Config->get($id)
+\end_layout
+
+\begin_layout Standard
+Auslesen eines Konfigurationswertes
+\end_layout
+
+\begin_layout Section
+Die lokale project.conf
+\end_layout
+
+\begin_layout Paragraph
+Quellcode
+\end_layout
+
+\begin_layout LyX-Code
+<?php
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+$sFileAutoloader = dirname(dirname(__FILE__)).'/temp/autoloader.inc';
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+$sPathBasedir = dirname(dirname(__FILE__)).'/';
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+$arrDb = array(
+\end_layout
+
+\begin_layout LyX-Code
+  'host' => 'localhost',
+\end_layout
+
+\begin_layout LyX-Code
+  'login' => '',
+\end_layout
+
+\begin_layout LyX-Code
+  'password' => '',
+\end_layout
+
+\begin_layout LyX-Code
+  'dbname' => '',
+\end_layout
+
+\begin_layout LyX-Code
+  'prefix' => ''
+\end_layout
+
+\begin_layout LyX-Code
+);
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+class Config {
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  private static $arrConfig = array();
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function set($id, $value) {
+\end_layout
+
+\begin_layout LyX-Code
+    $arrConfig[$id] = $value;
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function get($id) {
+\end_layout
+
+\begin_layout LyX-Code
+    if(isset($arrConfig[$id])) {
+\end_layout
+
+\begin_layout LyX-Code
+      return $arrConfig[$id];
+\end_layout
+
+\begin_layout LyX-Code
+    } else {
+\end_layout
+
+\begin_layout LyX-Code
+      return null;
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+Config::set('db', $arrDb);
+\end_layout
+
+\begin_layout LyX-Code
+Config::set('autoloader', $sFileAutoloader);
+\end_layout
+
+\begin_layout LyX-Code
+Config::set('basedir', $sPathBasedir);
+\end_layout
+
+\begin_layout LyX-Code
+unset($arrDb, $sFileAutoloader, $sPathBasedir);
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+?>
+\end_layout
+
+\begin_layout Part
+Benutzer- und Rechtemanagment
+\end_layout
+
+\begin_layout Chapter
+Benutzererkennung (Session)
+\end_layout
+
+\begin_layout Standard
+Die allerwichtigste Aufgabe eines Frameworks ist die zuverlässige und sichere
+ Identifizierung eines Besuchers.
+ Erst damit wird eine sichere Benutzer- und Rechteverwaltung ermöglicht.
+\end_layout
+
+\begin_layout Section
+Eindeutige Merkmale eines Besuchers
+\end_layout
+
+\begin_layout Itemize
+Cookies
+\end_layout
+
+\begin_layout Itemize
+Conditional-Get-ID (?)
+\end_layout
+
+\begin_layout Section
+Nicht eindeutige Merkmale eines Besucher
+\end_layout
+
+\begin_layout Itemize
+Cookies
+\end_layout
+
+\begin_layout Itemize
+Conditional-Get-ID
+\end_layout
+
+\begin_layout Itemize
+User-Agent
+\end_layout
+
+\begin_layout Itemize
+Accept-Encodings
+\end_layout
+
+\begin_layout Itemize
+Accept-Languages
+\end_layout
+
+\begin_layout Itemize
+Accept-Charset
+\end_layout
+
+\begin_layout Chapter
+Benutzerverwaltung (Authentifizierung)
+\end_layout
+
+\begin_layout Standard
+Die Benutzerdaten werden in einer Benutzertabelle (für Logindaten) gespeichert.
+ Werden weitere Benutzerdaten benötigt, müssen einzelne Module diese verwalten.
+ Das Framework selbst speichert nur folgende Daten über einen Benutzer:
+\end_layout
+
+\begin_layout Itemize
+Login
+\end_layout
+
+\begin_layout Itemize
+Passworthash
+\end_layout
+
+\begin_layout Itemize
+Passwort zuletzt geändert
+\end_layout
+
+\begin_layout Itemize
+Anzahl Logins
+\end_layout
+
+\begin_layout Itemize
+Anzahl Fehlversuche Logins seit letztem erfolgreichen Login
+\end_layout
+
+\begin_layout Itemize
+Benutzerstatus (aktiv, passiv, gesperrt, neues Passwort)
+\end_layout
+
+\begin_layout Itemize
+Beginn der Zugangsberechtigung
+\end_layout
+
+\begin_layout Itemize
+Ablauf der Zugangsberechtigung
+\end_layout
+
+\begin_layout Chapter
+Rechteverwaltung (Authorisierung)
+\end_layout
+
+\begin_layout Section
+unixoid
+\end_layout
+
+\begin_layout Section
+Benutzergruppen
+\end_layout
+
+\begin_layout Section
+Rollen
+\end_layout
+
+\begin_layout Part
+Datenvalidierung und Datenreinigung
+\end_layout
+
+\begin_layout Standard
+Decorator für die verschiedenen Filtertypen können ineinander geschachtelt
+ werden
+\end_layout
+
+\begin_layout Part
+Datenbankzugriff
+\end_layout
+
+\begin_layout Standard
+Das Framework stellt einen zentralen Zugang zum Datenbanksystem bereit.
+ Es werden eine Vielzahl aktueller Datenbanken unterstützt.
+ 
+\end_layout
+
+\begin_layout Chapter
+PDO und seine Treiber
+\end_layout
+
+\begin_layout Standard
+Seit der PHP Version 5 bietet PHP eine native Datenbankunterstützung an,
+ die objektorientiert und datenbankübergreifend funktioniert.
+ PDO ist eine Datenbankzugriffsschicht, die einen einfachen Zugriff auf
+ die Daten in unterschiedlichsten Datenbanken ermöglicht.
+ Die PDO-Treiber haben alle ein identisches Interface, sodass unabhängig
+ von verwendeten Datenbanksystem ein einheitlichen Zugriff auf die Daten
+ gewährleistet wird.
+\end_layout
+
+\begin_layout Chapter
+Tabellendefinition in OOP: Tabellen und Spalten als Objekte
+\end_layout
+
+\begin_layout Standard
+PDO bietet die Möglichkeit sich Ergebnisse einer Datenbankabfrage als Objekte
+ zurückgeben zu lassen.
+ Dabei kann der Programmierer ohne Weiteres eine bestimmte Klasse vorgeben,
+ die dazu verwendet werden soll.
+ Damit lassen sich die Datenbankabfragen sehr gut in die objektorientierte
+ Umgebung einbinden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../PHPCommerce/docs/DB.eps
+	display grayscale
+	width 86page%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Datenbankzugriff über Objekte
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit wird auch die Datenvalidierung in die Datenbankobjekte verlagert,
+ wo sie benötigt wird und im Kontext gesehen hingehört.
+\end_layout
+
+\begin_layout Section
+Validierung der Daten mittels Decorator-Pattern
+\end_layout
+
+\begin_layout Section
+Data-Access-Objects (DAO)
+\end_layout
+
+\begin_layout Section
+Querycache
+\end_layout
+
+\begin_layout Standard
+Ein nativer Querycache wird leider nicht von PHP angeboten; dafür wurde
+ ein Querycache programmiert.
+\end_layout
+
+\begin_layout Enumerate
+erstelle aus der Query einen MD5-Hash als ID für die Abfrage
+\end_layout
+
+\begin_layout Enumerate
+mekre den Zeitstempel der Abfrage
+\end_layout
+
+\begin_layout Enumerate
+serialisiere das Ergebnis der Abfrage 
+\end_layout
+
+\begin_layout Enumerate
+speichere die drei Daten in einer separaten Datenbank
+\end_layout
+
+\begin_layout Section
+Übergabe der SQL-Befehle an das Datenbankmodul
+\end_layout
+
+\begin_layout Section
+Datenbankdefinitionen für Installation und Update
+\end_layout
+
+\begin_layout Standard
+Jede Tabelle der Datenbank besitzt genau eine Klasse, welche exakt definiert,
+ welche Spalten die Tabelle hat, welche Indizes und Schlüssel verwaltet
+ werden.
+ Damit kann die Installation maßgeschneidert Tabelle für Tabelle die Datenbank
+ erstellen und auch exakte Fehlermeldungen bei Misserfolgen ausgeben.
+ Außerdem kann der Fortschrittsbalken während der Installation exakter gesteuert
+ werden.
+\end_layout
+
+\begin_layout Section
+Schützen der Datenbankzugriffsdaten
+\end_layout
+
+\begin_layout Standard
+Die Zugangsdaten für die Datenbank müssen unbedingt geschützt werden.
+ Damit kein Besucher sie jemals zu Gesicht bekommt, werden Sie verschlüsselt
+ abgelegt.
+ Das Passwort für die Verschlüsselung ist der Dateiname inkl.
+ Pfad der Datei.
+ Damit sind die Verbindungsdaten nicht von Clientseite auslesbar, selbst,
+ wenn in einem Fehlerfall der Quelltext der Datei ausgeliefert wird.
+\end_layout
+
+\begin_layout Part
+Programmablaufplan
+\end_layout
+
+\begin_layout Itemize
+index.php
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Laden der Konfiguration aus einer project.conf-Datei
+\end_layout
+
+\begin_layout Itemize
+Laden der Applikation entsprechend der Konfiguration
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+application.class
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Intialisieren des Autoloaders
+\end_layout
+
+\begin_layout Itemize
+Laden der Frameworkbestandteile
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Event: START
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Kommunikation
+\end_layout
+
+\begin_layout Chapter
+Eventhandler
+\end_layout
+
+\begin_layout Section
+Ereignisse erzeugen Aktionen
+\end_layout
+
+\begin_layout Standard
+Jedes Ereignis erzeugt mindestens eine Aktion.
+ Diese Standardaktion heißt genauso wie das Ereignis und wird immer aufgerufen.
+ 
+\end_layout
+
+\begin_layout Standard
+Sollen weitere Aktionen an das Ereignis gebunden werden, sind diese separat
+ beim Eventhandler zu registrieren.
+ Damit lässt sich problemlos ein großes und flexibles Netzwerk an Modulen.
+\end_layout
+
+\begin_layout Section
+Module binden sich an Aktionen
+\end_layout
+
+\begin_layout Standard
+Jedes Modul wird ausschließlich über Aktionen angesprochen.
+ Daraus ergibt sich die Art und Weise, wie Module ihre Aktionen public machen.
+ 
+\end_layout
+
+\begin_layout Part
+Die Struktur des Menüs
+\end_layout
+
+\begin_layout Chapter
+Baumstruktur
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../../PHPCommerce/docs/Menutree.eps
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Aufbau des Menübaumes: dreiteilig für verschiedene Aufgaben
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Dreiteilung
+\end_layout
+
+\begin_layout Subsection
+Public
+\end_layout
+
+\begin_layout Standard
+Die frei oder beschränkt zugänglichen Menüpunkte für alle Besucher
+\end_layout
+
+\begin_layout Subsection
+Admin
+\end_layout
+
+\begin_layout Standard
+Menüpunkte für zentrale administrative Aufgaben
+\end_layout
+
+\begin_layout Standard
+erscheint in einer separaten Box, wenn der Nutzer die passenden Rechte dazu
+ hat
+\end_layout
+
+\begin_layout Subsection
+Hidden
+\end_layout
+
+\begin_layout Standard
+erscheint niemals direkt
+\end_layout
+
+\begin_layout Standard
+Wird nur von verschiedenen Modulen genutzt, um Daten im Menübaum abzulegen,
+ ohne sie im Menübaum selber sichtbar werden zu lassen
+\end_layout
+
+\begin_layout Subsubsection*
+Clipboard - Die Zwischenablage
+\end_layout
+
+\begin_layout Subsubsection*
+Trash - Der Papierkorb
+\end_layout
+
+\begin_layout Subsubsection*
+Uploads - Das Medienzentrum
+\end_layout
+
+\begin_layout Subsubsection*
+Help - Die Hilfedaten
+\end_layout
+
+\begin_layout Section
+Datenbankstruktur
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+id MEDIUMINT auto_increment 
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+cid MEDIUMINT
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+ctype MEDIUMINT
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+pid MEDIUMINT
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+name VARCHAR(32)
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+lang BYTE
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_owner MEDIUMINT
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_version MEDIUMINT
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_created TIMESTAMP
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_modified TIMESTAMP
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_deleted TIMESTAMP
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+_visible BOOLEAN
+\end_layout
+
+\begin_layout Part
+OOP im Einsatz
+\end_layout
+
+\begin_layout Chapter
+Klassen und Objekte
+\end_layout
+
+\begin_layout Section
+Nomenklatur der Klassennamen
+\end_layout
+
+\begin_layout Standard
+Alle Klassen müssen eindeutige Namen erhalten um bei den zahlreichen Modulen
+ den Überblick zu behalten.
+ Daher wird grundsätzlich allen Klassennamen der Modulname vorangestellt.
+ Der erste Buchstabe des Modulnamens wird groß geschrieben.
+ Direkt im Anschluss daran wird der eigentliche Klassenname gesetzt.
+ Auch beim Klassennamen wird der erste Buchstabe groß geschrieben.
+\end_layout
+
+\begin_layout Subsubsection*
+Beispiele
+\end_layout
+
+\begin_layout Standard
+So ist es richtig:
+\end_layout
+
+\begin_layout LyX-Code
+/**
+\end_layout
+
+\begin_layout LyX-Code
+ * Modul Framework: Klasse Classloader
+\end_layout
+
+\begin_layout LyX-Code
+ */
+\end_layout
+
+\begin_layout LyX-Code
+class FrameworkClassloader {
+\end_layout
+
+\begin_layout Standard
+So ist es falsch:
+\end_layout
+
+\begin_layout LyX-Code
+/**
+\end_layout
+
+\begin_layout LyX-Code
+ * Modul Framework: Klasse Classloader
+\end_layout
+
+\begin_layout LyX-Code
+ */
+\end_layout
+
+\begin_layout LyX-Code
+class Framework_Classloader {}
+\end_layout
+
+\begin_layout LyX-Code
+class frameworkclassloader{}
+\end_layout
+
+\begin_layout LyX-Code
+class Classloader {}
+\end_layout
+
+\begin_layout Section
+Die Basisklasse
+\end_layout
+
+\begin_layout Chapter
+Modulverwaltung
+\end_layout
+
+\begin_layout Section
+Singleton-Pattern
+\end_layout
+
+\begin_layout Standard
+Der modulare Aufbau des Frameworks setzt zwingend einen sorgsamen Umgang
+ mit den Instanzen der Modulklassen vorraus.
+ Daher setzt das Framework bei der Verwaltung der Module auf das Singleton-Patte
+rn.
+ Dieses ermöglicht, bei jeder Anfrage nach einer Instanz von einer Klasse
+ immer ein und diesselbe Klasse zurückzugeben.
+ Damit kann ein Modul beispielsweise vom 
+\emph on
+Eventhandler
+\emph default
+ im Laufe des Skriptes mehrfach genutzt werden, ohne jedesmal die ganze
+ Initialisierungsprozedur ablaufen zu lassen.
+\end_layout
+
+\begin_layout Subsection
+Umsetzung mit PHP5
+\end_layout
+
+\begin_layout Paragraph
+Quellcode
+\end_layout
+
+\begin_layout LyX-Code
+<?php
+\end_layout
+
+\begin_layout LyX-Code
+public class ClassHandler {
+\end_layout
+
+\begin_layout LyX-Code
+  
+\end_layout
+
+\begin_layout LyX-Code
+  static $arrInstances = array();
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function getInstance($sClassname) {
+\end_layout
+
+\begin_layout LyX-Code
+    if(!isset(self::$arrInstances[$sClassname])) {
+\end_layout
+
+\begin_layout LyX-Code
+      self::$arrInstances[$sClassname] = new $sClassname();
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+    if(get_class(self::$arrInstances[$sClassname]) == $sClassname) {
+\end_layout
+
+\begin_layout LyX-Code
+      return self::$arrInstances[$sClassname];
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function copyInstance($sClassname) {
+\end_layout
+
+\begin_layout LyX-Code
+    if(!isset(self::$arrInstances[$sClassname])) {
+\end_layout
+
+\begin_layout LyX-Code
+      self::$arrInstances[$sClassname] = new $sClassname();
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+    if(get_class(self::$arrInstances[$sClassname]) == $sClassname) {
+\end_layout
+
+\begin_layout LyX-Code
+      return clone self::$arrInstances[$sClassname];
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+?>
+\end_layout
+
+\begin_layout Chapter
+Automatischer Klassenlader
+\end_layout
+
+\begin_layout Section
+Bytecode-Caches
+\end_layout
+
+\begin_layout Standard
+Die zunehmende Komplexität von PHP-Skripten verlangt immer öfter den Einsatz
+ von Bytecode-Caches, um die Laufzeit der Skripte auf den Servern zu optimieren.
+ Dazu werden alle Befehle vom Interpreter gelesen und in einen Bytecode
+ übersetzt.
+ Dieser wird dann in einem Cache gespeichert und anstelle des Skriptes bei
+ jedem Aufruf ausgeführt.
+ Damit lassen sich je nach Skript extreme Geschwindigkeitszuwächse erzielen.
+\end_layout
+
+\begin_layout Standard
+Leider hat der Einsatz von Bytecode-Caches einen kleinen prinzipbedingten
+ Nachteil.
+ Es werden immer nur die Dateien eingebunden, die nicht über variable Dateinamen
+ eingebunden werden.
+ Daher kann ein Bytecode-Cache nicht effizient mit dem Modulhandler zusammenarbe
+iten.
+ Dieser bindet die Dateien nämlich dynamisch erst zur Laufzeit ein.
+\end_layout
+
+\begin_layout Standard
+Um dem Problem zu entgehen und um die 
+\emph on
+Magic
+\emph default
+-Funktionen von PHP5 effizient zu nutzen, werden (bis auf einige wenige
+ Ausnahmen) keinerlei Dateien manuell eingebunden.
+ Im Quellcode existieren daher keine 
+\emph on
+include(_once)
+\emph default
+ oder 
+\emph on
+require(_once)
+\emph default
+ Befehle.
+\end_layout
+
+\begin_layout Standard
+Die einzigen Ausnahmen von dieser Regel sind die Dateien, die zur Kommunikation
+ des Frameworks mit der Außenwelt dienen sowie die eingebundenen Bibliotheken
+ von Drittanbietern.
+\end_layout
+
+\begin_layout Section
+Die Klasse AutoLoader
+\end_layout
+
+\begin_layout Standard
+stellt einige statische Funktionen bereit, um die automatische Einbindung
+ der Klassendefinitionen des Frameworks zu ermöglichen.
+\end_layout
+
+\begin_layout Subsection
+Die statische Methode 
+\emph on
+autoloadInclude()
+\end_layout
+
+\begin_layout Standard
+bindet die Cachedatei des Autoloaders ein und damit auf einen Schlag alle
+ benötigten Klassendefinitionen.
+ In der Cachedatei befindet sich für jede benötigte Klassendefinition eine
+ Zeile, die die Datei der Klassendefinition per 
+\emph on
+include()
+\emph default
+ einbindet.
+ Durch den massiven Aufruf aller benötigten Dateien wird sogar eine Zeitersparni
+s von mindestens 5% erzielt.
+\end_layout
+
+\begin_layout Standard
+Die Einbindung der Cachedatei geschieht innerhalb eines 
+\emph on
+try
+\emph default
+-Blockes, damit eventuelle Fehlermeldungen abgefangen werden können.
+ Existiert beispielsweise eine vormals benötigte Klasse nicht mehr, teilt
+ PHP uns das beim Parsen der Cachedatei mit.
+ Der Fehler wird abgefangen und die Cachedatei geleert; durch die 
+\emph on
+autoload
+\emph default
+-Funktion wird die Cachedatei nun bei diesem Aufruf wieder einmalig aktualisiert
+ und künftig bei jedem Aufruf wieder aktuell eingebunden.
+\end_layout
+
+\begin_layout Paragraph
+Quellcode
+\end_layout
+
+\begin_layout LyX-Code
+<?php
+\end_layout
+
+\begin_layout LyX-Code
+/**
+\end_layout
+
+\begin_layout LyX-Code
+ * Autoloader.class
+\end_layout
+
+\begin_layout LyX-Code
+ */
+\end_layout
+
+\begin_layout LyX-Code
+public class Autoloader {
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  private static $arrClasses = false;
+\end_layout
+
+\begin_layout LyX-Code
+  private static $sFilename = false;
+\end_layout
+
+\begin_layout LyX-Code
+  private static $sPathBasedir = false;
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function autoloadInclude() {
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+    if(!self::$sFilename) self::$sFilename = Config::get('autoloader');
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+    try {
+\end_layout
+
+\begin_layout LyX-Code
+      include_once(self::$sFilename);
+\end_layout
+
+\begin_layout LyX-Code
+    } catch (exception $e) {
+\end_layout
+
+\begin_layout LyX-Code
+      if($e->errormessage == 'File not found!') {
+\end_layout
+
+\begin_layout LyX-Code
+        $dh = fopen(Config::get('autoloader'), 'wb');
+\end_layout
+
+\begin_layout LyX-Code
+        fclose($fh);
+\end_layout
+
+\begin_layout LyX-Code
+      }
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  public static function autoload($sClassname) {
+\end_layout
+
+\begin_layout LyX-Code
+    if(is_array($arrClasses)) {
+\end_layout
+
+\begin_layout LyX-Code
+      if(isset($arrClasses[$sClassname])) {
+\end_layout
+
+\begin_layout LyX-Code
+        ClassLoader::addFile($arrClasses[$sClassname]['file']);
+\end_layout
+
+\begin_layout LyX-Code
+      }
+\end_layout
+
+\begin_layout LyX-Code
+    }
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  protected static function searchClasses() {
+\end_layout
+
+\begin_layout LyX-Code
+    if(!self::$sPathBasedir) self::$sPathBasedir = Config::get('basedir');
+\end_layout
+
+\begin_layout LyX-Code
+    
+\end_layout
+
+\begin_layout LyX-Code
+    $arr 
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+  protected static function addFile($sFilename) {
+\end_layout
+
+\begin_layout LyX-Code
+  }
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+function __autoload($sClassname) { Autoloader::autoload($sClassname); }
+\end_layout
+
+\begin_layout LyX-Code
+?>
+\end_layout
+
+\begin_layout Part
+Tipps und Tricks
+\end_layout
+
+\begin_layout Chapter
+Download von Dateien
+\end_layout
+
+\begin_layout LyX-Code
+<?php
+\end_layout
+
+\begin_layout LyX-Code
+header('Content-Type: application/octetstream');  // Dateityp, der immer
+ abgespeichert wird
+\end_layout
+
+\begin_layout LyX-Code
+header('Content-Disposition: '.(!strpos('$_SERVER['HTTP_USER_AGENT'], 'MSIE
+ 5.5') ? 'attachment; ' : '').'filename='.$sFilename);  //Dateiname mit Sonderbehan
+dlung für IE 5.5
+\end_layout
+
+\begin_layout LyX-Code
+header('Content-Transfer-Encoding: binary');  // unnötig, aber hat sich
+ scheinbar bewährt
+\end_layout
+
+\begin_layout LyX-Code
+header('Cache-Control: post-check=0, pre-check=0');  // Zwischenspeichern
+ auf Proxies verhindern
+\end_layout
+
+\begin_layout LyX-Code
+header('Content-Length: '.$iFilesize);  // Dateigröße
+\end_layout
+
+\begin_layout LyX-Code
+?>
+\end_layout
+
+\begin_layout Chapter
+Contenttypen
+\end_layout
+
+\begin_layout Section
+Containertypen
+\end_layout
+
+\begin_layout Subsection
+page (grid)
+\end_layout
+
+\begin_layout Subsection
+serie
+\end_layout
+
+\begin_layout Section
+Basistypen
+\end_layout
+
+\begin_layout Subsection
+text
+\end_layout
+
+\begin_layout Subsection
+image
+\end_layout
+
+\begin_layout Subsection
+table
+\end_layout
+
+\begin_layout Subsection
+list
+\end_layout
+
+\begin_layout Section
+Spezialtypen
+\end_layout
+
+\begin_layout Subsection
+Der Shopartikel (article)
+\end_layout
+
+\begin_layout Subsubsection
+Die Neuigkeit (news)
+\end_layout
+
+\begin_layout Part
+Anhang
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList table
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand printindex
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

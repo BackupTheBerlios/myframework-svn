@@ -1,0 +1,14 @@
+<?php
+
+class Module_Content_Command_Update implements ifaceCommand {
+	public function execute() {
+		
+	}
+	
+	public function bind(ifaceController $objController) {
+		
+	}
+	
+}
+
+?>

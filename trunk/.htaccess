@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /Programme/MyFramework/
+
+RewriteCond %{SCRIPT_FILENAME} !index.php
+RewriteRule (.*) index.php?path=$1 [R=301,PT,QSA]

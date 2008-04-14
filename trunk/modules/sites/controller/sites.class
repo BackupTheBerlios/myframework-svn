@@ -1,0 +1,39 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 06.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Module_Sites_Controller_Sites implements ifaceModuleController {
+
+	protected $objModel = null;
+	protected $objView = null;
+
+	public function bind(ifaceController $objController) {
+	    $this->objController = $objController;
+	}
+
+	public function start() {
+
+		// load the tree-model
+		$this->objModel = new Module_Sites_Model_Tree($this->objController->getDataBase());
+
+		// get the url-param "site"
+		$objRequest = $this->objController->getRequest();
+		$objEventHandler = $this->objController->getEventHandler();
+
+		$objEventHandler->event('sites::start');
+
+		$iId = $objRequest->getInt('id');
+
+		// load the page-data from tree-model for the current page
+		$objPage = $this->objModel->getPage($iId);
+
+		Debug::d($this);
+		Debug::d($objPage);
+	}
+}
+?>

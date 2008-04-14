@@ -1,0 +1,8 @@
+<?php
+
+class QueryCache implements ifaceSingleton {
+
+    protected function __construct() {
+    }
+}
+?>

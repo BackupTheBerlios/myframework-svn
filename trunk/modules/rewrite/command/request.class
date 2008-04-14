@@ -1,0 +1,21 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 24.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Module_Rewrite_Command_Request extends AbstractCommand {
+
+	protected $objController = null;
+
+	public function execute() {
+
+		$objModuleRewrite = $this->objController->getModule('Rewrite');
+		$objModuleRewrite->getPageData();
+	}
+}
+
+?>

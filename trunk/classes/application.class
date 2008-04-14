@@ -1,0 +1,64 @@
+<?php
+
+
+/*
+ * Created on 09.07.2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
+
+class Application implements ifaceController {
+
+	public function __construct($arrBaseConfig) {
+
+		AutoLoader :: loadFromCache($arrBaseConfig);
+
+		$this->objConfig = Config :: getInstance();
+		foreach($arrBaseConfig as $sId => $mValue) {
+			$this->objConfig->$sId = $mValue;
+		}
+
+		$this->objDataBase = DataBase :: getInstance();
+
+		$this->objEventHandler = EventHandler :: getInstance();
+		$this->objEventHandler->bind($this);
+
+		$this->objModuleManager = ModuleManager :: getInstance();
+		$this->objModuleManager->bind($this);
+
+		$this->objRequest = Request :: getInstance();
+		$this->objRequest->bind($this);
+
+		$this->objEventHandler->event('start');
+
+	}
+
+	public function bind(ifaceController $objController) {
+	}
+
+	public function getDataBase() {
+		return $this->objDataBase;
+	}
+
+	public function getConfig() {
+		return $this->objConfig;
+	}
+
+	public function getEventHandler() {
+		return $this->objEventHandler;
+	}
+
+	public function getModule($sModuleClass) {
+		return $this->objModuleManager->getModule($sModuleClass);
+	}
+
+	public function getRequest() {
+		return $this->objRequest;
+	}
+
+	public function __destruct() {
+		AutoLoader :: saveToCache($this->objConfig);
+	}
+}
+?>

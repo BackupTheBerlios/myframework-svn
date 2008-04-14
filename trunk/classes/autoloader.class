@@ -1,0 +1,105 @@
+<?php
+
+
+/*
+ * MyFramework::
+ *
+ * @since 01.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+class AutoLoader {
+
+	protected static $arrClassFiles = array();
+	protected static $sCacheFile = '';
+
+	public static function load($sClassName) {
+		$sClassName = preg_replace('/[^a-zA-Z_]/i', '', $sClassName);
+		$arrClassPath = explode('_', $sClassName);
+
+
+		if(count($arrClassPath) > 0) {
+			$sClassFile = ($arrClassPath[0] == 'Module' ? 'modules' : ($arrClassPath[0] == 'Lib' ? 'libs' : 'classes'));
+			if(count($arrClassPath) > 1) array_shift($arrClassPath);
+			$sClassFile .= DIRECTORY_SEPARATOR.strtolower(implode(DIRECTORY_SEPARATOR, $arrClassPath)) . '.class';
+			$sClassFileName = self :: loadClass($sClassFile);
+			
+			if (class_exists($sClassName) || interface_exists($sClassName)) {
+				self :: $arrClassFiles[] = $sClassFileName;
+				return true;
+			}
+		}
+		/* start the recursive filesystem-check for $sClassName */
+
+		/* did not found any file with the requested classname */
+		throw new exception('The class ' . $sClassName . ' cannot be found in the filesystem!!! (tried path \'' . $sClassFile . '\')');
+	}
+
+	public static function loadClass(& $sClassFile) {
+
+		$sClassFile = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . $sClassFile;
+		if(strpos($sClassFile, '/iface') > 0) {
+			$sClassFile = str_replace(array('/iface', '.class'), array('/', '.iface'), $sClassFile);
+
+			if (file_exists($sClassFile)) {
+				include ($sClassFile);
+				return $sClassFile;
+			}
+
+		}
+
+		if (file_exists($sClassFile)) {
+			include ($sClassFile);
+			return $sClassFile;
+		}
+		return false;
+	}
+
+	public static function saveToCache() {
+		if(!is_array(self :: $arrClassFiles) || count(self :: $arrClassFiles) == 0) {
+			return;
+		}
+
+		$sOutput = '';
+		$sOutput .= '<?php'."\n".'include(\'';
+		$sOutput .= implode ('\');'."\n".'include(\'', self :: $arrClassFiles);
+		$sOutput .= '\');'."\n".'?>';
+
+		echo $sOutput;
+
+		Debug :: d($arrClassFiles);
+
+		file_put_contents(self :: $sCacheFile, $sOutput);
+	}
+
+	public static function loadFromCache($arrConfig) {
+		self :: getCacheFile($arrConfig);
+		self :: $arrClassFiles = null;
+		if(file_exists(self :: $sCacheFile)) {
+			include_once(self :: $sCacheFile);
+		}
+
+	}
+
+	public static function getCacheFile($arrConfig) {
+		if(!is_array(self :: $arrClassFiles) || count(self :: $arrClassFiles) == 0) {
+			return;
+		}
+
+		$arrCacheConf = $arrConfig['cache'];
+		$arrAutoloaderConf = $arrConfig['autoload'];
+
+		$arrParams = $_GET;
+
+		asort($arrParams);
+
+		$sPath = $_SERVER['PHP_SELF'];
+		foreach($arrParams as $sId => $sValue) {
+			$sPath .= '&'.$sId.'='.$sValue;
+		}
+		self :: $sCacheFile = $arrCacheConf['path'].str_replace('%s', md5($sPath), $arrAutoloaderConf['filename']);
+	}
+}
+?>

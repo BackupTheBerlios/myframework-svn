@@ -1,0 +1,28 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 24.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+class Module_Rewrite_Model_Permalink {
+	protected
+		$arrColumns = array();
+
+	public function __construct(DataBase $objDataBase) {
+		$this->objDataBase = $objDataBase;
+	}
+
+	public function getIdForPage($sPageName) {
+		$sQuery = 'SELECT id, _lang FROM my_permalinks WHERE path=?';
+		$objStmt = $this->objDataBase->prepare($sQuery);
+		$objStmt->bindParam(1, $sPageName);
+		$objStmt->execute();
+		$arrResult = $objStmt->fetch();
+		return $arrResult;
+	}
+}
+?>

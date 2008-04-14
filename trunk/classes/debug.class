@@ -1,0 +1,47 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 03.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Debug {
+
+	public static function d($mData = '') {
+		self :: dHtml();
+		echo '<div class="debug"><div class="debugData">';
+		print_r($mData);
+		echo '</div></div>';
+	}
+
+	public static function dHtml() {
+		static $bCalled = false;
+		if(!$bCalled) {
+			$bCalled = true;
+
+			$sCss = <<<CSS
+	<style type="text/css">
+		div.debug { background-color: silver; font-family: monospace; font-size: 10px;  border: 1px solid black; color: black; padding: 5px; }
+		div.debugData { white-space: pre; }
+	</style>
+CSS;
+			echo $sCss;
+		}
+	}
+
+	public static function startProfile($sProfileId) {
+
+	}
+
+	public static function stopProfile($sProfileId) {
+
+	}
+
+	public static function getProfileReport($sProfileId = '') {
+
+	}
+}
+
+?>

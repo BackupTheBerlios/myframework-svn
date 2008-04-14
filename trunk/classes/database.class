@@ -1,0 +1,55 @@
+<?php
+class DataBase extends PDO implements ifaceSingleton {
+
+	static $objInstance = false;
+	protected
+		$objDb = null,
+		$arrConfig = array();
+
+	static function getInstance() {
+		if (!(self :: $objInstance instanceof DataBase)) {
+			self :: $objInstance = new DataBase(Config :: get('db'));
+		}
+		return self :: $objInstance;
+	}
+
+	public function __construct(array $arrConfig) {
+		$this->arrConfig = $arrConfig;
+	}
+
+	protected function connectDb() {
+		if($this->objDb instanceof PDO) {
+		} else {
+			try {
+				$temp = Config::get('conf');
+				$arrData = parse_ini_file($temp['basedir'].$this->arrConfig['file'], true);
+				$this->arrConfig = array_merge($this->arrConfig, $arrData[$this->arrConfig['select']]);
+				$sDsn = $this->arrConfig['type'] . ':host=' . $this->arrConfig['host'] . ';dbname=' . $this->arrConfig['database'];
+				$this->objDb = new PDO($sDsn, $this->arrConfig['user'], $this->arrConfig['pass']);
+			} catch (exception $e) {
+				echo $e->getMessage();
+			}
+		}
+	}
+
+	public function exec($sQuery) {
+		$this->connectDb();
+		return $this->objDb->exec($sQuery);
+	}
+
+	public function prepare($sQuery) {
+		$this->connectDb();
+		return $this->objDb->prepare($sQuery);
+	}
+
+	public function query($sQuery) {
+		$this->connectDb();
+		return $this->objDb->query($sQuery);
+	}
+
+	protected function mapTableNames($sTableName) {
+		return $sTableName;
+	}
+
+}
+?>

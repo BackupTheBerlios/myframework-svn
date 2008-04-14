@@ -1,0 +1,14 @@
+<?php
+
+class Module_Content_Command_Delete implements ifaceCommand {
+	public function execute() {
+		
+	}
+	
+	public function bind(ifaceController $objController) {
+		
+	}
+	
+}
+
+?>

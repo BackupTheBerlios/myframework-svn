@@ -1,0 +1,14 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 12.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+interface ifaceController {
+	public function bind(ifaceController $objController);
+}
+?>

@@ -1,0 +1,13 @@
+<?php
+
+class Module_Sites_Command_Start extends AbstractCommand {
+
+	protected $objController = null;
+
+	public function execute() {
+
+		$objModuleSites = $this->objController->getModule('Sites');
+		$objModuleSites->start();
+	}
+}
+?>

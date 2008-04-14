@@ -1,0 +1,12 @@
+<?php
+
+class Module {
+
+    protected $objController = null;
+
+    public function bind(ifaceController $objController) {
+		$this->objController = $objController;
+    }
+}
+
+?>

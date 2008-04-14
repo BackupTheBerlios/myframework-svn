@@ -1,0 +1,41 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 09.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Request implements ifaceSingleton {
+
+	protected
+		$arrRequestData = array (),
+		$arrAvailableFilters = array('int', 'string', 'html', 'xhtml', 'float', 'boolean', 'url', 'email', 'encoded');
+	protected static
+		$objInstance = null;
+
+	public static function getInstance() {
+		if (!(self :: $objInstance instanceof Request)) {
+			self :: $objInstance = new Request();
+		}
+		return self :: $objInstance;
+	}
+
+	public function __construct() {
+		$this->arrRequestData = array('REQUEST' => &$_REQUEST, 'GET' => &$_GET, 'POST' => &$_POST, 'COOKIES' => &$_COOKIE, 'SESSION' => &$_SESSION);
+	}
+
+	public function execute($objController) {
+
+	}
+
+	public function bind(ifaceController $objController) {
+	    $this->objController = $objController;
+	}
+
+	public function get($iFilterChain = 0) {
+		
+	}
+}
+?>

@@ -1,0 +1,11 @@
+<?php
+
+class Module_Content_Controller_Content {
+	
+	public function getContentObject($iId) {
+		
+	}
+	
+}
+
+?>

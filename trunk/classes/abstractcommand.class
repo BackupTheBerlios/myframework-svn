@@ -1,0 +1,14 @@
+<?php
+
+abstract class AbstractCommand implements ifaceCommand {
+
+    protected 
+	$objController = null;
+
+    public function bind(ifaceController $objController) {
+	$this->objController = $objController;
+    }
+    
+}
+
+?>

@@ -1,0 +1,24 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 04.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Event {
+
+	protected
+		$arrActionQueue = array();
+
+	public function __construct($arrActionQueue) {
+
+	}
+
+	public function handleEvent() {
+
+	}
+
+}
+?>

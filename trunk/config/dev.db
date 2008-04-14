@@ -1,0 +1,6 @@
+[default]
+type=mysql
+host=localhost
+database=framework
+user=framework
+pass=u6VdzQS2e6EGcnNt

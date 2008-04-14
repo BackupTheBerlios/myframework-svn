@@ -1,0 +1,84 @@
+<?php
+
+/*
+ * Created on 09.07.2007
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - PHPeclipse - PHP - Code Templates
+ */
+class Config implements ArrayAccess, IteratorAggregate, ifaceSingleton {
+
+	private static $objInstance;
+	protected $arrConfig = array ();
+
+	private function __construct() {
+	}
+
+	public static function getInstance() {
+		if (!isset (self :: $objInstance)) {
+			$c = __CLASS__;
+			self :: $objInstance = new $c ();
+		}
+		return self :: $objInstance;
+	}
+
+	public static function set($sId, $mValue) {
+		self :: getInstance()-> $sId = $mValue;
+	}
+
+	public static function get($sId) {
+		self :: getInstance();
+		return self :: $objInstance-> $sId;
+	}
+
+	/**
+	 * declare the magic-methods for easy access to the config-object
+	 */
+	function __set($sId, $mValue) {
+		$this->arrConfig[$sId] = $mValue;
+
+	}
+
+	function __get($sId) {
+		return $this->arrConfig[$sId];
+	}
+
+	function __isset($sId) {
+		return isset ($this->arrConfig[$sId]);
+	}
+
+	function __unset($sId) {
+		unset ($this->arrConfig[$sId]);
+		return true;
+	}
+
+	/**
+	 * declare the interface-methods for ArrayAccess and IteratorAggregate
+	 */
+	function getIterator() {
+		return new ArrayIterator($this->arrConfig);
+	}
+
+	function offsetExists($sId) {
+		return isset ($this->arrConfig[$sId]);
+	}
+
+	function offsetGet($sId) {
+		if ($this->offsetExists($sId))
+			return $this->arrConfig[$sId];
+		else
+			return (false);
+	}
+
+	function offsetSet($sId, $mValue) {
+		if ($sId)
+			$this->arrConfig[$sId] = $mValue;
+		else
+			$this->arrConfig[] = $mValue;
+	}
+
+	function offsetUnset($offset) {
+		unset ($this->objectArray[$offset]);
+	}
+}
+?>

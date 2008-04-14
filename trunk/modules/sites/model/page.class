@@ -1,0 +1,28 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 06.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+class Module_Sites_Model_Page {
+	protected
+		$arrColumns = array();
+
+	public function getName() {
+
+	}
+
+	public function getPath() {
+
+	}
+
+	public function save() {
+
+	}
+
+}
+?>

@@ -1,0 +1,96 @@
+* { padding: 0; margin: 0; }
+
+html { font-size: 62.5%; }
+body { font-size: 140%; line-height: 1.5; }
+
+.DatePicker { background-image: url("../img/cal.gif"); background-repeat: no-repeat; background-position: center right;  }
+
+div.DatePicker-Container {}
+div.DatePicker-Wrapper { background-color: #FFFFFF; border: 1px solid #000; }
+div.DatePicker-Wrapper table {}
+div.DatePicker-Wrapper td { padding: 0px; }
+div.DatePicker-Wrapper td.nav {}
+div.DatePicker-Wrapper td.dayName { font-weight: bold; background-color: #EEEEEE; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; }
+div.DatePicker-Wrapper td.day, div.DatePicker-Wrapper td.empty { border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; }
+div.DatePicker-Wrapper td.current { background-color: #666666; color: #FFFFFF; font-weight: bold; }
+div.DatePicker-Wrapper td.dp_roll { background-color: #E0E0E0; }
+div.DatePicker-Wrapper select { width: auto; }
+#mooRainbow { font-size: 11px; color: #000; }
+
+.moor-box { width: 390px; height: 310px; border: 1px solid #636163; background-color: #f9f9f9; }
+.moor-overlayBox { width: 256px; height: 256px; margin-top: 9px; margin-left: 9px; border: 1px solid #000; }
+.moor-slider { border: 1px solid #000; margin-top: 9px; margin-left: 280px; width: 19px; height: 256px; }
+.moor-colorBox { border: 1px solid #000; width: 59px; height: 68px; margin-top: 10px; margin-left: 315px; }
+.moor-currentColor { margin-top: 45px; margin-left: 316px; width: 59px; height: 34px; }
+.moor-okButton { font-family: Tahoma; font-weight: bold; font-size: 11px; margin-top: 278px; margin-left: 8px; height: 23px; }
+#mooRainbow label { font-family: mono; }
+.moor-rLabel { margin-top: 100px; margin-left: 315px; }
+.moor-gLabel { margin-top: 125px; margin-left: 315px; }
+.moor-bLabel { margin-top: 150px; margin-left: 315px; }
+.moor-HueLabel { margin-top: 190px; margin-left: 315px; }
+span.moor-ballino { margin-top: 190px; margin-left: 370px; }
+.moor-SatuLabel { margin-top: 215px; margin-left: 315px; }
+.moor-BrighLabel { margin-top: 240px; margin-left: 315px; }
+.moor-hexLabel { margin-top: 275px; margin-left: 280px; }
+.moor-rInput,
+.moor-gInput,
+.moor-bInput,
+.moor-HueInput,
+.moor-SatuInput,
+.moor-BrighInput { width: 30px; }
+.moor-hexInput { width: 55px; }
+.moor-cursor { background-image: url(../img/moor_cursor.gif); width: 12px; height: 12px; }
+.moor-arrows { background-image: url(../img/moor_arrows.gif); top: 9px; left: 270px; width: 41px; height: 9px; }
+.moor-chooseColor { margin-top: 11px; margin-left: 316px; width: 59px; height: 34px; }
+
+
+form * { font-family: 'Times New Roman', sans-serif; font-size: 1em; }
+form fieldset { width: 41em; padding: 0.5em 1em;  }
+form fieldset .fieldset {  }
+form fieldset legend {  }
+
+form dl dt { width: 20em; float: left; clear: left; margin: 0; padding: 0; }
+form dl dd { float: none; clear: none margin: 0; padding: 0 0 0.5em 0; }
+
+form dl dt
+form dl dd { margin: 0 0 0.5em 0; padding: 0.3em 0.5em 0.2em 0.4em; }
+
+form dt.error { color: red; }
+form dd.error * { border-color: red; }
+
+.text textarea,
+input.text { width: 20em; border: 1px solid #000; padding: 0 5px 0 3px; }
+select { width: 20.8em; border: 1px solid #000; }
+input.number { width: 5em; }
+option { padding: 0 5px 0 3px; }
+input.combo { position: absolute; padding: 0 5px 0 3px; }
+
+input.NumberPicker { text-align: right; border-right: 0; }
+
+.button-up,
+.button-down { border:1px outset #000; background: #bbb; color: #000; }
+
+.button-up:hover,
+.button-down:hover { background: #ddd; }
+
+.button-up:active,
+.button-up:focus,
+.button-down:active,
+.button-down:focus { border:1px inset #000; background: #ddd; outline: 0; }
+
+.button-up { position: relative; height: 0.7em; left: -1em; top: -0.6em; width: 1em; }
+.button-down { position: relative; height: 0.7em; left: 0; top: 1px; width: 1em; }
+
+.text textarea,
+.text .mceEditor { clear: left; display: block; width: 40em; height: 20em; }
+.text .mceEditor { margin-bottom: 0.4em; }
+.text .mceLayout { width: 40.8em !important; }
+
+dl.checkbox,
+dl.radio { overflow: hidden; }
+
+dl.checkbox dt,
+dl.radio dt { padding: 0pt 0pt 0.4em; width: 2em; height: 1.2em; }
+
+dl.checkbox dd,
+dl.radio dd { padding: 0pt 0pt 0.4em; }

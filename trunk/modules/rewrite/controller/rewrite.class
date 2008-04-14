@@ -1,0 +1,32 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 06.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Module_Rewrite_Controller_Rewrite implements ifaceModuleController {
+
+	protected $objModel = null;
+	protected $objView = null;
+
+	public function bind(ifaceController $objController) {
+	    $this->objController = $objController;
+		$this->objModel = new Module_Rewrite_Model_Permalink($this->objController->getDataBase());
+	}
+
+	public function getPageData() {
+		// get the url-param "site"
+		$objRequest = $this->objController->getRequest();
+		$sPath = $objRequest->getString('path');
+
+		// load the page-data from tree-model for the current page
+		$arrResult = $this->objModel->getIdForPage($sPath);
+
+		$objRequest->set('id', $arrResult['id']);
+		$objRequest->set('lang', $arrResult['_lang']);
+	}
+}
+?>

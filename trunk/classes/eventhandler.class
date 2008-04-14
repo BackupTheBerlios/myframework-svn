@@ -1,0 +1,51 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 04.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+class EventHandler implements ifaceSingleton	 {
+
+	protected $arrEvents = array(
+	    'start' => array ('Module_Sites_Command_Start'),
+	    'sites::start' => array ('Module_Rewrite_Command_Request')
+	);
+
+	protected static $objInstance = null;
+
+	public static function getInstance() {
+		if (!(self :: $objInstance instanceof EventHandler)) {
+			self :: $objInstance = new EventHandler();
+		}
+		return self :: $objInstance;
+	}
+
+	public function bind(ifaceController $objController) {
+	    $this->objController = $objController;
+	}
+
+	public function registerAction($sEventId, ifaceCommand $objCommand) {
+		if (!isset($this->arrEvents[$sEventId])) {
+			$this->arrEvents[$sEventId] = array($objCommand);
+		} else {
+			$this->arrEvents[$sEventId][] = $objCommand;
+		}
+	}
+
+	public function event($sEventId) {
+	    if(!isset($this->arrEvents[$sEventId])) {
+		return false;
+	    }
+	    foreach($this->arrEvents[$sEventId] as $sCommandClass) {
+		$objCommand = new $sCommandClass();
+		$objCommand->bind($this->objController);
+		$objCommand->execute();
+		unset($objCommand);
+	    }
+	}
+}
+?>

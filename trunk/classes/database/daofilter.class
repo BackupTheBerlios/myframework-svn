@@ -1,0 +1,13 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 27.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class DataBase_DaoFilter {
+
+}
+?>

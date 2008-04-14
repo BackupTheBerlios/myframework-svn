@@ -1,0 +1,84 @@
+<?php
+/**
+ * Using a nested-sets for working with the menutree. Nested sets are a good
+ * way to store a menutree into a database without using expensive recursion.
+ *
+ * Each item has two references: left and right and third one for referencing
+ * the individual pagedata.
+ *
+ * @author Martin Jahn
+ * @package Module-Sites
+ * @since 0.1alpha1 - 23.02.2008
+ * @subpackage Model Tree
+ * @todo implement the nested-set routines for using the tree
+ * @version versionstring
+ */
+class Module_Sites_Model_Tree {
+
+	protected
+		$arrColumns = array(
+			'id' => 'INT',
+			'page_id' => 'INT',
+			'page_type' => 'INT',
+			'left' => 'INT',
+			'right' => 'INT',
+			'name' => 'STRING',
+			'_lang' => 'INT',
+			'_owner' => 'INT',
+			'_version' => 'INT',
+			'_created' => 'INT',
+			'_modified' => 'INT',
+			'_deleted' => 'INT',
+			'_visible' => 'INT'
+		),
+		$arrSet = array();
+
+	public function __construct(DataBase $objDataBase) {
+		$this->objDataBase = $objDataBase;
+	}
+
+	/**
+	 * returns a page object for the page with the path $sPageName
+	 *
+	 * @access public
+	 * @param string sPageName the path to the page
+	 * @return Module_Sites_Model_Page instance of Page
+	 */
+	public function getPage($iId) {
+		$sQuery = 'SELECT * FROM my_sites WHERE id=?';
+	}
+
+	/**
+	 *
+	 * @param int iRootId the id of the root-page
+	 */
+	public function getTree($iRootId = 0) {
+		$sQuery = 'SELECT id, name, page_id, page_type FROM my_sites WHERE _visible = \'1\'';
+		$objResult = $this->objDataBase->query($sQuery);
+	}
+
+	/**
+	 * returns an page-object with the type of the param
+	 *
+	 * @access public
+	 * @param string sPageType type of the new page the function has to return
+	 * @return Module_Sites_Model_Page instance of a class of type sPageType
+	 */
+	public function newPage($sPageType) {
+		return new $sPageType();
+	}
+
+	/**
+	 * save the content of a page-object. calls the save-method of the page-
+	 * object for storing the individual page-data
+	 *
+	 * @access public
+	 * @param Module_Sites_Model_Page objPage page object to store in the tree
+	 */
+	public function savePage(Module_Sites_Model_Page $objPage) {
+		$objPage->save($this->objDb);
+
+	}
+}
+
+?>

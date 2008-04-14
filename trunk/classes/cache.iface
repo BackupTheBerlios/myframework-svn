@@ -1,0 +1,18 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 03.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+
+interface ifaceCache {
+
+	public function set($sCacheId, $sContent);
+
+	public function get($sCacheId);
+
+}
+?>

@@ -1,0 +1,15 @@
+<?php
+
+abstract class AbstractBatchCommand extends AbstractCommand {
+
+    protected
+	$arrCommands = array();
+
+    public function execute() {
+	foreach ($this->arrCommands as $objCommand) {
+	    $objCommand->execute();
+	}
+    }
+}
+
+?>

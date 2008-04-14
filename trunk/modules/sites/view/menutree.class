@@ -1,0 +1,13 @@
+<?php
+/*
+ * MyFramework::
+ *
+ * @since 28.02.2008
+ * @author Martin Jahn <martin.jahn@gmx.de>
+ * @package MyFramework package_name
+ * @access public
+ */
+class Module_Sites_View_Menutree {
+
+}
+?>
